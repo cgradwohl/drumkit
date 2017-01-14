@@ -4,7 +4,7 @@
 //
 // import express
 var express = require('express');
-var router = require('./api');
+//var router = require('./api');
 
 
 //
@@ -19,7 +19,7 @@ app.use('/', express.static('public'));
 
 // we use the api namespace on the router
 // so we dont conflict with front end routes /public
-app.use('/api', router);
+// app.use('/api', router);
 
 
 //
