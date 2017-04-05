@@ -1,9 +1,12 @@
 "use strict";
 
+// Get dependencies
+const express = require('express');
+const path = require('path');
+const http = require('http');
+const bodyParser = require('body-parser');
 
-//
-// import express
-var express = require('express');
+
 //var router = require('./api');
 
 
@@ -14,7 +17,12 @@ var app = express();
 
 // middleware to serve static files from public directory
 // this serves our public directory which contains our angular app
-app.use('/', express.static('public'));
+// app.use('/', express.static('public'));
+app.use(express.static(path.join(__dirname, '../public')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/index.html'));
+});
 
 
 // we use the api namespace on the router
