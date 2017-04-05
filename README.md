@@ -9,6 +9,6 @@ If you would like to develop this application further or run it on your own loca
 3. remove the .git file `rm -rf .git`
 4. initialized the repo as a new git repo `git init`
 5. make sure you have npm and node js installed then run `npm install`
-6. start the express dev server `npm start`
-
+6. start the express dev server `npm start`, the server will restart every time you save :)
+7. Navigate to `http://localhost:3000/`
 Happy Coding!
