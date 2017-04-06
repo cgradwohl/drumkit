@@ -4,16 +4,66 @@ window.addEventListener('keydown', function(e) {
 
 });
 
-/* Wes Bos's epic code with my notes:
-<script>
-    function removeTransition(e) {
-        if (e.propertyName !== 'transform') return;
-        e.target.classList.remove('playing');
-        // .target() ~ Get the element that triggered a specific event
-        // .classList() ~
-    }
 
-    Glossary:
+function removeTransition(e) {
+    if (e.propertyName !== 'transform') return;
+    e.target.classList.remove('playing');
+    // .target() ~ Get the element that triggered a specific event
+    // .classList() ~
+}
+function playSound(e) {
+    /*
+        here querySelector() grabs the audio tag with the data-key(see data-* above) equal
+        to "${e.keyCode}", were e.keyCode is the 'keydown' events keyCode.
+    */
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
+    /*
+        if not audio return and do nothing
+    */
+    if (!audio) return;
+    /*
+        here classList.add() adds the 'playing' attribute to the key element which has a
+        different css style than the plain key element
+    */
+    key.classList.add('playing');
+    /*
+        here we set the audio elements playback time to 0 seconds, then play the audio file
+        with the play() method.
+    */
+    audio.currentTime = 0;
+    audio.play();
+}
+const keys = Array.from(document.querySelectorAll('.key'));
+keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+window.addEventListener('keydown', playSound);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*
+
+    Notes:
 
     .querySelector(selector)
     Returns the first Element within the document (using depth-first pre-order traversal
@@ -50,36 +100,4 @@ window.addEventListener('keydown', function(e) {
     HTMLMediaElement.play()
     Begins playback of the media.
 
-    function playSound(e) {
-        /*
-
-            here querySelector() grabs the audio tag with the data-key(see data-* above) equal
-            to "${e.keyCode}", were e.keyCode is the 'keydown' events keyCode.
-        /
-        const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
-        const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
-
-
-        /*
-            if not audio return and do nothing
-        /
-        if (!audio) return;
-
-        /*
-            here classList.add() adds the 'playing' attribute to the key element which has a
-            different css style than the plain key element
-        /
-        key.classList.add('playing');
-
-        /*
-            here we set the audio elements playback time to 0 seconds, then play the audio file
-            with the play() method.
-        /
-        audio.currentTime = 0;
-        audio.play();
-    }
-
-    const keys = Array.from(document.querySelectorAll('.key'));
-    keys.forEach(key => key.addEventListener('transitionend', removeTransition));
-    window.addEventListener('keydown', playSound);
-</script>*/
+    */
